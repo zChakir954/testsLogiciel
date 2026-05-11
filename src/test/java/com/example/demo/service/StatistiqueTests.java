@@ -21,7 +21,9 @@ public class StatistiqueTests {
         stats.ajouter(mockV1);
         stats.ajouter(mockV2);
 
-        assertEquals(7500,stats.prixMoyen());
+        Echantillon resultat = stats.prixMoyen();
+        assertEquals(2, resultat.getNombreDeVoitures());
+        assertEquals(7500, resultat.getPrixMoyen());
         }
     
     @Test
