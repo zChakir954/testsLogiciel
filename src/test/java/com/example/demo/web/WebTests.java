@@ -27,4 +27,15 @@ class WebTests {
     @Autowired
     MockMvc mockMvc;
 
+    @Test
+    public void getStatistiques_avecDeuxVoitures_retourneOketJson() throws Exception {        
+        when(statistiqueImpl.prixMoyen())
+        .thenReturn(new Echantillon(2, 7500));
+
+        mockMvc.perform(get("/statistique"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.nombreDeVoitures").value(2))
+                .andExpect(jsonPath("$.prixMoyen").value(7500));
+    }
+
 }
