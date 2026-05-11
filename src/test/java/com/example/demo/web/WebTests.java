@@ -62,4 +62,5 @@ class WebTests {
         verify(statistiqueImpl, times(1)).ajouter(any());
     }
 
+
 }
