@@ -41,7 +41,7 @@ class WebTests {
     @Test
     public void getStatistiques_sansVoiture_retourneErreur() throws Exception {
         when(statistiqueImpl.prixMoyen())
-            .thenThrow(new ArithmeticException);
+            .thenThrow(new ArithmeticException());
 
         mockMvc.perform(get("/statistique"))
             .andDo(print())
@@ -61,5 +61,6 @@ class WebTests {
 
         verify(statistiqueImpl, times(1)).ajouter(any());
     }
+
 
 }
