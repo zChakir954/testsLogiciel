@@ -45,7 +45,7 @@ class WebTests {
 
         mockMvc.perform(get("/statistique"))
             .andDo(print())
-            .andExpect(status().isNotFound());
+            .andExpect(status().isBadRequest());
     }
 
      @Test
