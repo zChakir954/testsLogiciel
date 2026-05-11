@@ -39,4 +39,13 @@ public class StatistiqueTests {
         assertEquals(1, resultat.getNombreDeVoitures());  // cas spécifique à 1 voiture
         assertEquals(10000, resultat.getPrixMoyen());
     }
+
+    @Test
+    public void prixMoyen_sansVoiture_leveUneArithmeticException() {
+        StatistiqueImpl stats = new StatistiqueImpl();
+
+        assertThrows(ArithmeticException.class, () -> {
+            stats.prixMoyen();
+        });
+    }
 }
