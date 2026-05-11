@@ -35,6 +35,8 @@ public class StatistiqueTests {
 
         stats.ajouter(mockV1);
 
-        assertEquals(10000, stats.prixMoyen());
+        Echantillon resultat = stats.prixMoyen();
+        assertEquals(1, resultat.getNombreDeVoitures());  // cas spécifique à 1 voiture
+        assertEquals(10000, resultat.getPrixMoyen());
     }
 }
