@@ -27,4 +27,39 @@ class WebTests {
     @Autowired
     MockMvc mockMvc;
 
+    @Test
+    public void getStatistiques_avecDeuxVoitures_retourneOketJson() throws Exception {        
+        when(statistiqueImpl.prixMoyen())
+        .thenReturn(new Echantillon(2, 7500));
+
+        mockMvc.perform(get("/statistique"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.nombreDeVoitures").value(2))
+                .andExpect(jsonPath("$.prixMoyen").value(7500));
+    }
+
+    @Test
+    public void getStatistiques_sansVoiture_retourneErreur() throws Exception {
+        when(statistiqueImpl.prixMoyen())
+            .thenThrow(new ArithmeticException);
+
+        mockMvc.perform(get("/statistique"))
+            .andDo(print())
+            .andExpect(status().isNotFound());
+    }
+
+     @Test
+    public void creerVoiture_avecJsonValide_appelleAjouter() throws Exception {
+
+        String voitureJson = "{\"marque\":\"Audi\",\"prix\":10000}";
+
+        mockMvc.perform(post("/voiture")
+                .contentType("application/json")
+                .content(voitureJson))
+               .andDo(print())
+               .andExpect(status().isOk());                             
+
+        verify(statistiqueImpl, times(1)).ajouter(any());
+    }
+
 }
